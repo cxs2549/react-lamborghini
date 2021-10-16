@@ -9,6 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
+}
+
+main {
+  background-color: #000;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 xl:px-0 flex items-center justify-between h-full
 }
 
 h1 {

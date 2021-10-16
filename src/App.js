@@ -1,8 +1,12 @@
+import Header from "./components/layout/Header/Header"
+
 const App = () => {
   return (
-    <div className="px-5">
-      <h2>aventador lp 780-4 ultimate roadster</h2>
-      <h1>Based on a true story</h1>
+    <div>
+      <Header />
+      <main className="bg-gray-800 h-screen max-w-7xl mx-auto">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse 
+      </main>
     </div>
   )
 }

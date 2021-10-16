@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "craco start",
-     "build": "craco build",
-     "test": "craco test",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,7 +38,12 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
+    "hamburger-react": "^2.4.1",
     "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+    "react-headroom": "^3.2.0",
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "use-onclickoutside": "^0.4.0"
   }
 }
