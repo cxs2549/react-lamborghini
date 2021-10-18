@@ -14,10 +14,10 @@ const StyledMenu = styled.div`
 
     }
 `
-const Menu = ({open}) => {
+const Menu = ({open, children}) => {
 return (
 <StyledMenu open={open}>
-
+    {children}
 </StyledMenu>
 )
 }

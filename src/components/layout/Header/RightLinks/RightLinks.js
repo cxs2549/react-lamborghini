@@ -5,7 +5,7 @@ const RightLinks = () => {
 return (
 <StyledRightLinks className="hidden xl:flex gap-6 uppercase">
     {links.map((link, i) => (
-        <a href="/" className="opacity-75">{link}</a>
+        <a href="/" className="opacity-80 nav-link">{link}</a>
     ))}
 </StyledRightLinks>
 )

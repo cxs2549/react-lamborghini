@@ -38,3 +38,18 @@ h2 {
   margin-bottom: .75rem;
 }
 
+svg, button, a {
+  cursor: pointer;
+}
+
+.nav-link {
+		transition: font-size 0.3s ease-in-out;
+		font-weight: 300;
+		color: #fff;
+		letter-spacing: 0.075em;
+		text-transform: uppercase;
+		text-align: center;
+	cursor: pointer;
+}
+
+
