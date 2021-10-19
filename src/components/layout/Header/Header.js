@@ -6,7 +6,7 @@ import RightLinks from './RightLinks/RightLinks'
 const StyledHeader = styled.header`
 	background-color: #131313;
 	position: relative;
-	z-index: 10;
+	z-index: 1;
 	#left {
 		grid-template-columns: 56px 1fr;
 	}

@@ -5,8 +5,12 @@ import useOnClickOutside from 'use-onclickoutside'
 import { CSSTransition } from 'react-transition-group'
 
 const StyledLeftLinks = styled.ul`
+	position: relative;
 	li {
 		&:hover {
+			a {
+				opacity: 1;
+			}
 			a:before {
 				opacity: 1;
 				width: 100%;
@@ -14,6 +18,8 @@ const StyledLeftLinks = styled.ul`
 		}
 		a {
 			position: relative;
+			opacity: .75;
+
 			&::before {
 				content: '';
 				position: absolute;
@@ -34,23 +40,38 @@ const StyledLeftLinks = styled.ul`
 	}
 
 	.dropdown-enter {
+		color: transparent;
 		max-height: 0;
 	}
 	.dropdown-enter-active {
-		max-height: 50%;
-		transition: max-height 300ms;
+		color: white;
+		transition: all 800ms;
+		max-height: 50rem;
+		transition-delay: color 2s;
 	}
+
 	.dropdown-exit {
-		max-height: 50%;
+		color: white;
+		max-height: 50rem;
 	}
 	.dropdown-exit-active {
+		color: transparent;
+		transition: all 500ms;
 		max-height: 0;
-		transition: max-height 300ms;
+		transition-delay: color 2s;
 	}
 `
 const LeftLinks = () => {
 	const links = [
-		{ name: 'models', links: [ { name: 'aventador', links: [ 'item1', 'item2', 'item3' ] } ] },
+		{
+			name: 'models',
+			links: [
+				{ name: 'aventador', links: [ 'item1', 'item2', 'item3' ] },
+				{ name: 'huracan', links: [ 'item1', 'item2', 'item3' ] },
+				{ name: 'aventador', links: [ 'item1', 'item2', 'item3' ] },
+				{ name: 'veneno', links: [ 'item1', 'item2', 'item3' ] }
+			]
+		},
 		{
 			name: 'custom solutions',
 			links: [
@@ -114,6 +135,20 @@ const LeftLinks = () => {
 			toggleModal4(!isShowingModal4)
 		}
 	]
+	const allDropTogglesFalse = [
+		() => {
+			toggleModal1(false)
+		},
+		() => {
+			toggleModal2(false)
+		},
+		() => {
+			toggleModal3(false)
+		},
+		() => {
+			toggleModal4(false)
+		}
+	]
 
 	const allMenus = [ isShowingModal1, isShowingModal2, isShowingModal3, isShowingModal4 ]
 
@@ -139,37 +174,58 @@ const LeftLinks = () => {
 				{links.map((link, i) => (
 					<li
 						key={i}
-						id={`link-${i}`}
 						ref={refs[i]}
 						className="relative h-full flex items-center px-5"
 						onMouseEnter={allDropToggles[i]}
-						onMouseLeave={allDropToggles[i]}
+						onMouseLeave={allDropTogglesFalse[i]}
 					>
-						<a href="/" onClick={handleSubmit} className="opacity-80 nav-link">
+						<a href="/" onClick={handleSubmit} className=" nav-link">
 							{link.name}
 						</a>
 
 						<CSSTransition
 							in={isShowingModal1 && i === 0}
-							timeout={300}
+							timeout={800}
 							classNames="dropdown"
 							unmountOnExit
 						>
 							<Dropdown
 								links={link.links}
+								color="yellow"
 								open={isShowingModal1 && i === 0}
 							/>
 						</CSSTransition>
 						<CSSTransition
 							in={isShowingModal2 && i === 1}
-							timeout={300}
+							timeout={800}
 							classNames="dropdown"
 							unmountOnExit
 						>
 							<Dropdown
 								links={link.links}
+								color="green"
 								open={isShowingModal2 && i === 1}
 							/>
+						</CSSTransition>
+						<CSSTransition
+							in={isShowingModal3 && i === 2}
+							timeout={800}
+							classNames="dropdown"
+							unmountOnExit
+						>
+							<Dropdown
+								links={link.links}
+								color="blue"
+								open={isShowingModal3 && i === 2}
+							/>
+						</CSSTransition>
+						<CSSTransition
+							in={isShowingModal4 && i === 3}
+							timeout={800}
+							classNames="dropdown"
+							unmountOnExit
+						>
+							<Dropdown links={link.links} open={isShowingModal4 && i === 3} />
 						</CSSTransition>
 					</li>
 				))}
