@@ -1,42 +1,51 @@
 import styled from 'styled-components'
 import Dropdown from '../Dropdown/Dropdown'
-import { CSSTransition } from 'react-transition-group'
 import { useRef, useState } from 'react'
 import useOnClickOutside from 'use-onclickoutside'
+import { CSSTransition } from 'react-transition-group'
 
 const StyledLeftLinks = styled.ul`
-	a {
-		position: relative;
-		&::before {
-			content: '';
-			position: absolute;
-			height: 1px;
-			width: 10%;
-			border-radius: 9px;
-			background-color: #fff;
-			bottom: -4px;
-			opacity: 0;
-			transition: all 400ms;
+	li {
+		&:hover {
+			a:before {
+				opacity: 1;
+				width: 100%;
+			}
 		}
-		&:hover::before, &:active:before {
-			opacity: 1;
-			width: 100%;
+		a {
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				height: 1px;
+				width: 10%;
+				border-radius: 9px;
+				background-color: #fff;
+				bottom: -4px;
+				opacity: 0;
+				transition: all 400ms;
+			}
+			&:hover::before,
+			&:active:before {
+				opacity: 1;
+				width: 100%;
+			}
 		}
 	}
 
 	.dropdown-enter {
-		opacity: 0;
+		max-height: 0;
 	}
 	.dropdown-enter-active {
-		opacity: 1;
-		transition: opacity 1s;
+		max-height: 50%;
+		transition: max-height 300ms;
 	}
 	.dropdown-exit {
-		opacity: 1;
+		max-height: 50%;
 	}
 	.dropdown-exit-active {
-		opacity: 0;
-		transition: opacity 1s;
+		max-height: 0;
+		transition: max-height 300ms;
 	}
 `
 const LeftLinks = () => {
@@ -85,6 +94,7 @@ const LeftLinks = () => {
 		// { name: 'history' },
 		// { name: 'news' }
 	]
+	const [ isShowing, setIsShowing ] = useState(false)
 	const [ isShowingModal1, toggleModal1 ] = useState(false)
 	const [ isShowingModal2, toggleModal2 ] = useState(false)
 	const [ isShowingModal3, toggleModal3 ] = useState(false)
@@ -120,27 +130,51 @@ const LeftLinks = () => {
 	useOnClickOutside(ref4, () => toggleModal4(false))
 
 	const handleSubmit = (event) => {
-		event.preventDefault();
-	  };
-	  
+		event.preventDefault()
+	}
 
 	return (
-		<StyledLeftLinks className="hidden xl:flex gap-6 uppercase">
-			{links.map((link, i) => (
-				<li
-					key={i}
-					id={`link-${i}`}
-					ref={refs[i]}
-					className="relative"
-					onClick={allDropToggles[i]}
-					// onMouseOver={allDropToggles[i]}
-				>
-					<a href="/" onClick={handleSubmit} className="opacity-80 nav-link">{link.name}</a>
+		<div className="h-full">
+			<StyledLeftLinks className="hidden xl:flex items-center justify-center uppercase h-full ">
+				{links.map((link, i) => (
+					<li
+						key={i}
+						id={`link-${i}`}
+						ref={refs[i]}
+						className="relative h-full flex items-center px-5"
+						onMouseEnter={allDropToggles[i]}
+						onMouseLeave={allDropToggles[i]}
+					>
+						<a href="/" onClick={handleSubmit} className="opacity-80 nav-link">
+							{link.name}
+						</a>
 
-					<Dropdown links={link.links} open={allMenus[i]} />
-				</li>
-			))}
-		</StyledLeftLinks>
+						<CSSTransition
+							in={isShowingModal1 && i === 0}
+							timeout={300}
+							classNames="dropdown"
+							unmountOnExit
+						>
+							<Dropdown
+								links={link.links}
+								open={isShowingModal1 && i === 0}
+							/>
+						</CSSTransition>
+						<CSSTransition
+							in={isShowingModal2 && i === 1}
+							timeout={300}
+							classNames="dropdown"
+							unmountOnExit
+						>
+							<Dropdown
+								links={link.links}
+								open={isShowingModal2 && i === 1}
+							/>
+						</CSSTransition>
+					</li>
+				))}
+			</StyledLeftLinks>
+		</div>
 	)
 }
 export default LeftLinks

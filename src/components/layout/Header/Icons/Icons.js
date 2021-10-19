@@ -86,7 +86,7 @@ const Icons = () => {
 			</div>
 			{/* burger */}
 			<div ref={menuRef}>
-				<div id="burger" className="flex justify-center opacity-75 ">
+				<div id="burger" className="flex justify-center opacity-75 -mr-2">
 					<Hamburger
 						color="#fff"
 						rounded

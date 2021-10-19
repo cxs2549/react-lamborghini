@@ -7,16 +7,19 @@ const StyledHeader = styled.header`
 	background-color: #131313;
 	position: relative;
 	z-index: 10;
+	#left {
+		grid-template-columns: 56px 1fr;
+	}
 `
 const Header = () => {
 	return (
 		<StyledHeader className="h-16 xl:h-20">
 			<div className="container">
-				<div className="flex items-center gap-12">
+				<div id="left" className="grid items-center w-7/12 h-full">
 					<Logo />
 					<LeftLinks />
 				</div>
-				<div className="flex items-center gap-12">
+				<div className="flex items-center justify-end gap-12 w-5/12 h-full">
 					<RightLinks />
 					<Icons />
 				</div>

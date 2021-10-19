@@ -3,7 +3,7 @@ const StyledRightLinks = styled.nav``
 const RightLinks = () => {
     const links = ['dealerships', 'museum', 'store']
 return (
-<StyledRightLinks className="hidden xl:flex gap-6 uppercase">
+<StyledRightLinks className="hidden xl:flex gap-6 uppercase h-full items-center">
     {links.map((link, i) => (
         <a href="/" className="opacity-80 nav-link">{link}</a>
     ))}
